@@ -1,16 +1,16 @@
-import { ethers } from "hardhat";
+const hre = require("hardhat");
 
 async function main() {
 
   //deploy Token
-  const Token = await ethers.deployContract("Token");
+  const Token = await hre.ethers.deployContract("Token");
   await Token.waitForDeployment();
   console.log(`Token  deployed to ${Token.target}`);
 
 
   //deploy GamersVault
-  const GamersVault = await ethers.deployContract("GamersVault");
-  await GamersVault.waitForDeployment();
+  const GamersVault = await hre.ethers.deployContract("GamersVault");
+  await GamersVault.waitForDeployment(`${Token.address}`);
   console.log(`GamersVault deployed to ${GamersVault.target}`);
 
 }
